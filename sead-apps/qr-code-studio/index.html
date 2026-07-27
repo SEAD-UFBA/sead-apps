@@ -1250,32 +1250,40 @@
       });
     });
 
+    // Helper to escape reserved characters in vCard field values (RFC 6350)
+    function escapeVCardString(str) {
+      return str.replace(/\\/g, '\\\\')
+                .replace(/;/g, '\\;')
+                .replace(/,/g, '\\,')
+                .replace(/\n/g, '\\n');
+    }
+
     // Helper: format standard VCard format
     function formatVCard() {
-      const firstName = document.getElementById('vc-first-name').value.trim();
-      const lastName = document.getElementById('vc-last-name').value.trim();
-      const phone = document.getElementById('vc-phone').value.trim();
-      const email = document.getElementById('vc-email').value.trim();
-      const org = document.getElementById('vc-org').value.trim();
-      const title = document.getElementById('vc-title').value.trim();
-      const url = document.getElementById('vc-url').value.trim();
+      const firstName = escapeVCardString(document.getElementById('vc-first-name').value.trim());
+      const lastName = escapeVCardString(document.getElementById('vc-last-name').value.trim());
+      const phone = escapeVCardString(document.getElementById('vc-phone').value.trim());
+      const email = escapeVCardString(document.getElementById('vc-email').value.trim());
+      const org = escapeVCardString(document.getElementById('vc-org').value.trim());
+      const title = escapeVCardString(document.getElementById('vc-title').value.trim());
+      const url = escapeVCardString(document.getElementById('vc-url').value.trim());
 
       if (!firstName && !lastName && !phone && !email) return '';
 
       let vcard = 'BEGIN:VCARD\nVERSION:3.0\n';
-      
+
       // Name
       if (firstName || lastName) {
         vcard += `N:${lastName};${firstName};;;\n`;
         vcard += `FN:${firstName} ${lastName}\n`.trim() + '\n';
       }
-      
+
       if (org) vcard += `ORG:${org}\n`;
       if (title) vcard += `TITLE:${title}\n`;
       if (phone) vcard += `TEL;TYPE=CELL:${phone}\n`;
       if (email) vcard += `EMAIL;TYPE=PREF,INTERNET:${email}\n`;
       if (url) vcard += `URL:${url}\n`;
-      
+
       vcard += 'END:VCARD';
       return vcard;
     }
