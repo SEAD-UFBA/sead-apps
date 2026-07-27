@@ -13,8 +13,6 @@ sead-apps/
         └── index.html
 ```
 
-> **Nota:** existe uma pasta `sead-apps/` duplicada dentro do repositório (`sead-apps/sead-apps/...`), provavelmente resultado do upload inicial dos arquivos. Os aplicativos funcionam normalmente, mas veja a seção [Problemas encontrados](#problemas-encontrados-na-revisão) para uma sugestão de correção.
-
 ---
 
 ## 📱 QR Code Studio
@@ -83,7 +81,3 @@ Suíte de compactação e mesclagem de PDFs e imagens, processada inteiramente n
 Abra o arquivo `index.html` no navegador. **Requer conexão com a internet no primeiro carregamento**, pois Tailwind, FontAwesome, PDF-Lib e PDF.js são carregados via CDN (ver observação abaixo).
 
 ---
-
-## Problemas encontrados na revisão
-
-Veja a resposta no chat para a lista completa e priorizada de problemas identificados no código, com sugestões de correção.
